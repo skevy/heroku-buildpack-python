@@ -92,9 +92,9 @@ export PKG_CONFIG_PATH=/app/.heroku/vendor/lib/pkg-config:$BUILD_DIR/.heroku/ven
 cd $BUILD_DIR
 
 # Experimental pre_compile hook.
-#bpwatch start pre_compile
+bpwatch start pre_compile
   source $BIN_DIR/steps/hooks/pre_compile
-#bpwatch stop pre_compile
+bpwatch stop pre_compile
 
 env | grep PKG_CONFIG_PATH
 

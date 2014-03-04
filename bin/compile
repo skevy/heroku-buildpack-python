@@ -96,6 +96,8 @@ bpwatch start pre_compile
   source $BIN_DIR/steps/hooks/pre_compile
 bpwatch stop pre_compile
 
+env | grep PKG_CONFIG_PATH
+
 # If no requirements given, assume `setup.py develop`.
 if [ ! -f requirements.txt ]; then
   puts-step "No requirements.txt provided; assuming dist package."
@@ -219,10 +221,6 @@ puts-step "Installing dependencies using Pip ($PIP_VERSION)"
 
 [ ! "$FRESH_PYTHON" ] && bpwatch start pip_install
 [ "$FRESH_PYTHON" ] && bpwatch start pip_install_first
-
-env | grep PKG_CONFIG_PATH
-
-ls -lah $PKG_CONFIG_PATH
 
 /app/.heroku/python/bin/pip install -r requirements.txt --exists-action=w --src=./.heroku/src --allow-all-external  | cleanup | indent
 
